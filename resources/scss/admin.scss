@@ -113,3 +113,33 @@
     background: #334155; // grijsblauw
     color: #e5e7eb;
 }
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status.online {
+    color: #22c55e;
+}
+
+.status.online .dot {
+    background: #22c55e;
+}
+
+.status.offline {
+    color: #ef4444;
+}
+
+.status.offline .dot {
+    background: #ef4444;
+}

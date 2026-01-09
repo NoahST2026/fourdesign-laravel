@@ -35,12 +35,17 @@
                             </td>
                             <td>{{ $user->email }}</td>
                             <td class="bcrypt">{{ $user->password }}</td>
-                            <td>
-                                <span class="status">
-                                    <span class="status-dot {{ $user->email_verified_at ? 'active' : 'inactive' }}"></span>
-                                    {{ $user->email_verified_at ? 'Actief' : 'Niet actief' }}
-                                </span>
-                            </td>
+                                <td>
+                                    @if(auth()->check() && auth()->id() === $user->id)
+                                        <span class="status online">
+                                            <span class="dot"></span> Online
+                                        </span>
+                                    @else
+                                        <span class="status offline">
+                                            <span class="dot"></span> Offline
+                                        </span>
+                                    @endif
+                                </td>
                         </tr>
                     @endforeach
                 </tbody>
