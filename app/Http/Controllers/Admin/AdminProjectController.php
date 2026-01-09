@@ -9,8 +9,8 @@ class AdminProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::latest()->get();
-
+       $projects = Project::with('user')->latest()->get();
+       
         return view('admin.projects.index', compact('projects'));
     }
 
