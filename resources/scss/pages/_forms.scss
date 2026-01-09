@@ -1,0 +1,28 @@
+.form-header {
+    margin-bottom: 2rem;
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 0.25rem;
+    }
+
+    p {
+        color: #6b7280;
+        font-size: 0.95rem;
+    }
+}
+
+.form-error {
+    font-size: 0.8rem;
+    color: #dc2626;
+    margin-top: 0.25rem;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+    border-color: #dc2626;
+
+    &:focus {
+        box-shadow: 0 0 0 3px rgba(220,38,38,0.2);
+    }
+}

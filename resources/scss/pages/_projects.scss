@@ -1,0 +1,93 @@
+.projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin: 0;
+    }
+}
+
+.projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ===============================
+   Project show page
+================================ */
+
+.page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #9ca3af;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+}
+
+.card {
+    background: #0f172a;
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 25px 60px rgba(0,0,0,.35);
+}
+
+.card h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.project-image {
+    margin: 1.5rem 0 2rem;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #020617;
+
+    img {
+        width: 100%;
+        max-height: 420px;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+.project-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #cbd5f5;
+    margin-bottom: 2rem;
+}
+
+/* Actions under project */
+.actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+}
+
+.flex.justify-between.text-sm {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}

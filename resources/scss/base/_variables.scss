@@ -1,0 +1,15 @@
+/* Colors */
+$primary: #2563eb;
+$primary-dark: #1e40af;
+$danger: #dc2626;
+$gray-100: #f5f7fb;
+$gray-600: #6b7280;
+$gray-800: #1f2937;
+
+/* Base body */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: $gray-100;
+    margin: 0;
+    color: #111827;
+}
