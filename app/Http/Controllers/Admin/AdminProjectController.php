@@ -1,22 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Project;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreProjectRequest;
-use App\Http\Requests\UpdateProjectRequest;
-use Illuminate\Auth\Access\AuthorizationException;
 
-class ProjectController extends Controller
+class AdminProjectController extends Controller
 {
-public function index()
-{
-    $projects = auth()->user()->projects;
+    public function index()
+    {
+        $projects = Project::latest()->get();
 
-    return view('projects.index', compact('projects'));
-}
-
+        return view('admin.projects.index', compact('projects'));
+    }
 
     public function show(Project $project)
     {
@@ -32,28 +28,23 @@ public function index()
         return view('projects.create');
     }
 
-    public function store(Request $request)
-{
-    $data = $request->validate([
-        'title' => ['required', 'string', 'max:255'],
-        'description' => ['required'],
-        'url' => ['nullable', 'url'],
-        'image' => ['nullable', 'image'],
-    ]);
+    public function store(StoreProjectRequest $request)
+    {
+        $this->authorize('create', Project::class);
 
-    $data['user_id'] = auth()->id();
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
 
-    if ($request->hasFile('image')) {
-        $data['image'] = $request->file('image')->store('projects', 'public');
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('projects', 'public');
+        }
+
+        Project::create($data);
+
+        return redirect()
+            ->route('projects.index')
+            ->with('success', 'Project succesvol aangemaakt!');
     }
-
-    Project::create($data);
-
-    return redirect()
-        ->route('projects.index')
-        ->with('success', 'Project succesvol aangemaakt!');
-}
-
 
     public function edit(Project $project)
     {

@@ -1,0 +1,115 @@
+.admin-dashboard {
+    padding: 3rem 0;
+    background: linear-gradient(180deg, #0f172a, #020617);
+    min-height: 100vh;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.admin-card {
+    background: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.admin-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.admin-subtitle {
+    color: #94a3b8;
+    margin-top: 0.25rem;
+}
+
+.admin-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #e5e7eb;
+}
+
+/* TABLE */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #e5e7eb;
+
+    th {
+        text-align: left;
+        font-weight: 600;
+        padding-bottom: 0.75rem;
+        color: #94a3b8;
+        border-bottom: 1px solid #1e293b;
+    }
+
+    td {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #1e293b;
+        vertical-align: middle;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+}
+
+.bcrypt {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+/* STATUS */
+.status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status-dot.active {
+    background: #22c55e;
+    box-shadow: 0 0 6px #22c55e;
+}
+
+.status-dot.inactive {
+    background: #ef4444;
+    box-shadow: 0 0 6px #ef4444;
+}
+
+.role {
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.role.admin {
+    background: #7c3aed; // paars
+    color: #fff;
+}
+
+.role.user {
+    background: #334155; // grijsblauw
+    color: #e5e7eb;
+}
