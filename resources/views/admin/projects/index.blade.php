@@ -1,44 +1,45 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="admin-projects">
+<div class="admin-projects-page">
 
-    <div class="projects-header">
-        <h1>Alle projecten</h1>
-
-        <input
-            type="text"
-            id="projectFilter"
-            placeholder="Zoek op titel of gebruiker..."
-        >
+    <div class="page-header">
+        <h1>All Projects</h1>
     </div>
 
-    <div class="projects-grid" id="projectsGrid">
+    <div class="projects-grid">
         @foreach($projects as $project)
-            <div
-                class="project-card"
-                data-title="{{ strtolower($project->title) }}"
-                data-user="{{ strtolower($project->user->name ?? '') }}"
-            >
-                <h2>{{ $project->title }}</h2>
+            <div class="project-card">
 
-                <p class="project-user">
-                    {{ $project->user->name ?? 'Onbekend' }}
-                </p>
+                <div class="project-image">
+                    @if($project->image)
+                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
+                    @else
+                        <div class="image-placeholder"></div>
+                    @endif
 
-                <p class="project-email">
-                    {{ $project->user->email ?? '—' }}
-                </p>
+                    <div class="user-overlay">
+                        {{ $project->user->name ?? 'Unknown user' }}
+                    </div>
+                </div>
 
-                <span class="project-date">
-                    {{ $project->created_at->format('d-m-Y') }}
-                </span>
+                <div class="project-content">
+                    <h2>{{ $project->title }}</h2>
+                    <p>{{ $project->description }}</p>
+
+                    <div class="actions">
+                        <a href="{{ route('admin.projects.show', $project) }}">View</a>
+                        <a href="{{ route('admin.projects.edit', $project) }}">Edit</a>
+                    </div>
+                </div>
+
             </div>
         @endforeach
     </div>
 
 </div>
 @endsection
+
 
 @push('scripts')
 <script>

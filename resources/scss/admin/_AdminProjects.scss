@@ -1,75 +1,149 @@
-.admin-projects {
-    padding: 40px;
-    color: #e5e7eb;
+.admin-projects-page {
+    padding: 48px;
 
-    .projects-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .page-header {
         margin-bottom: 32px;
 
         h1 {
-            font-size: 26px;
+            font-size: 32px;
             color: #fff;
-        }
-
-        input {
-            background: #020617;
-            border: 1px solid #1e293b;
-            padding: 10px 14px;
-            border-radius: 6px;
-            color: #e5e7eb;
-            width: 260px;
-
-            &::placeholder {
-                color: #64748b;
-            }
-
-            &:focus {
-                outline: none;
-                border-color: #3b82f6;
-            }
         }
     }
 
     .projects-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 32px;
     }
 
     .project-card {
-        background: #0f172a;
-        border: 1px solid #1e293b;
-        border-radius: 12px;
-        padding: 20px;
-        transition: transform .2s ease, box-shadow .2s ease;
+        background: #1e293b;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,.35);
+        transition: transform .2s ease;
 
         &:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,.3);
+            transform: translateY(-6px);
         }
+    }
+
+    .project-image {
+        position: relative;
+        height: 200px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #020617, #1e293b);
+        }
+
+        .user-overlay {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+
+            padding: 8px 14px;
+            border-radius: 10px;
+
+            background: rgba(2, 6, 23, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            color: #e5e7eb;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+
+    .project-content {
+        padding: 20px;
 
         h2 {
             font-size: 18px;
-            margin-bottom: 8px;
             color: #fff;
+            margin-bottom: 6px;
         }
 
-        .project-user {
+        p {
             font-size: 14px;
             color: #94a3b8;
+            margin-bottom: 16px;
         }
 
-        .project-email {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 12px;
+        .actions {
+            display: flex;
+            gap: 16px;
+
+            a {
+                font-size: 14px;
+                text-decoration: none;
+                font-weight: 500;
+
+                &:first-child {
+                    color: #60a5fa;
+                }
+
+                &:last-child {
+                    color: #facc15;
+                }
+            }
+        }
+    }
+}
+
+.admin-project-edit {
+    max-width: 700px;
+
+    .back-link {
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        color: #8b8cff;
+        text-decoration: none;
+    }
+
+    .card {
+        background: #1e293b;
+        padding: 2rem;
+        border-radius: 16px;
+    }
+
+    h1 {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+
+        label {
+            display: block;
+            margin-bottom: .4rem;
+            opacity: .8;
         }
 
-        .project-date {
-            font-size: 12px;
-            color: #94a3b8;
+        input,
+        textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: .75rem;
+            color: white;
         }
+    }
+
+    .btn-primary {
+        background: #6366f1;
+        border: none;
+        padding: .75rem 1.5rem;
+        border-radius: 12px;
+        cursor: pointer;
     }
 }

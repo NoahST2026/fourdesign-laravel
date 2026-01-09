@@ -10,7 +10,7 @@ class AdminProjectController extends Controller
     public function index()
     {
        $projects = Project::with('user')->latest()->get();
-       
+
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -18,7 +18,7 @@ class AdminProjectController extends Controller
     {
         $this->authorize('view', $project);
 
-        return view('projects.show', compact('project'));
+        return view('admin.projects.show', compact('project'));
     }
 
     public function create()
@@ -46,29 +46,25 @@ class AdminProjectController extends Controller
             ->with('success', 'Project succesvol aangemaakt!');
     }
 
-    public function edit(Project $project)
-    {
-        $this->authorize('update', $project);
+public function edit(Project $project)
+{
+    return view('admin.projects.edit', compact('project'));
+}
 
-        return view('projects.edit', compact('project'));
-    }
+public function update(Request $request, Project $project)
+{
+    $project->update(
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+        ])
+    );
 
-    public function update(UpdateProjectRequest $request, Project $project)
-    {
-        $this->authorize('update', $project);
+    return redirect()
+        ->route('admin.projects.index')
+        ->with('success', 'Project updated');
+}
 
-        $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('projects', 'public');
-        }
-
-        $project->update($data);
-
-        return redirect()
-            ->route('projects.show', $project)
-            ->with('success', 'Project geüpdatet!');
-    }
 
     public function destroy(Project $project)
     {
