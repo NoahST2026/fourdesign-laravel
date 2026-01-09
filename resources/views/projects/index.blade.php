@@ -50,11 +50,13 @@
                                 Edit
                             </a>
 
-                            <form method="POST" action="{{ route('projects.destroy', $project) }}">
+                            <form method="POST"
+                                action="{{ route('projects.destroy', $project) }}"
+                                class="js-delete-form">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="btn btn--danger">
+                                <button type="button" class="btn btn--danger js-delete-btn">
                                     Delete
                                 </button>
                             </form>
