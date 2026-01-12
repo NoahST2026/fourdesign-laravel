@@ -6,46 +6,48 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProjectController;
+use App\Http\Middleware\TrackUserOnline;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
+Route::middleware([TrackUserOnline::class])->group(function () {
 
-Route::get('/', function () {
-    return redirect()->route('dashboard');
-});
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
 
-Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
 
-    /*
-    |--------------------------------------------------------------------------
-    | User routes
-    |--------------------------------------------------------------------------
-    */
+        /*
+        |--------------------------------------------------------------------------
+        | User routes
+        |--------------------------------------------------------------------------
+        */
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard');
 
-    Route::resource('projects', ProjectController::class);
+        Route::resource('projects', ProjectController::class);
 
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
+        Route::get('/profile', [ProfileController::class, 'edit'])
+            ->name('profile.edit');
 
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
+        Route::patch('/profile', [ProfileController::class, 'update'])
+            ->name('profile.update');
 
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])
+            ->name('profile.destroy');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Admin routes
-    |--------------------------------------------------------------------------
-    */
+        Route::post('/heartbeat', function () {
+            return response()->json(['status' => 'ok']);
+        })->middleware('auth')->name('heartbeat');
 
-    Route::middleware(['admin'])
+
+        /*
+        |--------------------------------------------------------------------------
+        | Admin routes
+        |--------------------------------------------------------------------------
+        */
+
+        Route::middleware(['admin'])
             ->prefix('admin')
             ->name('admin.')
             ->group(function () {
@@ -69,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
                     ->name('projects.destroy');
             });
 
+    });
 
 });
 

@@ -6,6 +6,8 @@ use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+
 
 class User extends Authenticatable
 {
@@ -35,4 +37,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Project::class);
     }
+    public function isOnline(): bool
+{
+    return Cache::has('user-is-online-' . $this->id);
+}
 }

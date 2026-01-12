@@ -9,10 +9,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $projects = Project::where('user_id', Auth::id())
+            ->latest()
+            ->get();
 
-        return view('dashboard', [
-            'projectsCount' => Project::where('user_id', $user->id)->count(),
-        ]);
+        return view('dashboard', compact('projects'));
     }
 }

@@ -36,14 +36,10 @@
                             <td>{{ $user->email }}</td>
                             <td class="bcrypt">{{ $user->password }}</td>
                                 <td>
-                                    @if(auth()->check() && auth()->id() === $user->id)
-                                        <span class="status online">
-                                            <span class="dot"></span> Online
-                                        </span>
+                                    @if($user->isOnline())
+                                        <span class="text-green-400">● Online</span>
                                     @else
-                                        <span class="status offline">
-                                            <span class="dot"></span> Offline
-                                        </span>
+                                        <span class="text-red-400">● Offline</span>
                                     @endif
                                 </td>
                         </tr>

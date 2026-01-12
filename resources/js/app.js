@@ -31,3 +31,14 @@ document.getElementById('confirmDelete')?.addEventListener('click', () => {
     deleteForm?.submit();
 });
 
+setInterval(() => {
+    fetch('/heartbeat', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute('content'),
+            'Accept': 'application/json'
+        }
+    });
+}, 30000); // elke 30 sec
