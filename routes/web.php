@@ -45,26 +45,29 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     */
 
-Route::middleware(['auth', 'admin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
+    Route::middleware(['admin'])
+            ->prefix('admin')
+            ->name('admin.')
+            ->group(function () {
 
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
-            ->name('dashboard');
+                Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+                    ->name('dashboard');
 
-        Route::get('/projects', [AdminProjectController::class, 'index'])
-            ->name('projects.index');
+                Route::get('/projects', [AdminProjectController::class, 'index'])
+                    ->name('projects.index');
 
-        Route::get('/projects/{project}', [AdminProjectController::class, 'show'])
-            ->name('projects.show');
+                Route::get('/projects/{project}', [AdminProjectController::class, 'show'])
+                    ->name('projects.show');
 
-        Route::get('/projects/{project}/edit', [AdminProjectController::class, 'edit'])
-            ->name('projects.edit');
+                Route::get('/projects/{project}/edit', [AdminProjectController::class, 'edit'])
+                    ->name('projects.edit');
 
-        Route::put('/projects/{project}', [AdminProjectController::class, 'update'])
-            ->name('projects.update');
-    });
+                Route::put('/projects/{project}', [AdminProjectController::class, 'update'])
+                    ->name('projects.update');
+
+                Route::delete('/projects/{project}', [AdminProjectController::class, 'destroy'])
+                    ->name('projects.destroy');
+            });
 
 
 });

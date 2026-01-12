@@ -12,10 +12,14 @@ class ProjectController extends Controller
 {
 public function index()
 {
-    $projects = auth()->user()->projects;
+    $projects = Project::where('user_id', auth()->id())
+        ->latest()
+        ->get();
 
     return view('projects.index', compact('projects'));
 }
+
+
 
 
     public function show(Project $project)

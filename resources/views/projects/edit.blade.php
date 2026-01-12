@@ -64,6 +64,7 @@
         <div class="form-actions">
             <a href="{{ route('projects.index') }}">Cancel</a>
 
+
             <button type="submit" class="btn btn--primary">
                 Update project
             </button>

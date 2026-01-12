@@ -51,12 +51,13 @@
                             </a>
 
                             <form method="POST"
-                                action="{{ route('projects.destroy', $project) }}"
-                                class="js-delete-form">
+                                  action="{{ route('projects.destroy', $project) }}">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="button" class="btn btn--danger js-delete-btn">
+                                <button type="submit"
+                                        onclick="return confirm('Are you sure?')"
+                                        class="text-red-400 hover:underline">
                                     Delete
                                 </button>
                             </form>
@@ -66,8 +67,11 @@
                 </li>
             @endforeach
         </ul>
+    @else
+        <p class="text-gray-400">
+            You don’t have any projects yet.
+        </p>
     @endif
 
 </div>
-
 @endsection

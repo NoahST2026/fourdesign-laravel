@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
 
 class AdminProjectController extends Controller
 {
@@ -53,27 +55,41 @@ public function edit(Project $project)
 
 public function update(Request $request, Project $project)
 {
-    $project->update(
-        $request->validate([
-            'title' => 'required|string',
-            'description' => 'nullable|string',
-        ])
-    );
+    $data = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'image' => 'nullable|image|max:2048',
+    ]);
+
+    if ($request->hasFile('image')) {
+        // oude image verwijderen
+        if ($project->image) {
+            Storage::disk('public')->delete($project->image);
+        }
+
+        $data['image'] = $request->file('image')->store('projects', 'public');
+    }
+
+    $project->update($data);
 
     return redirect()
         ->route('admin.projects.index')
-        ->with('success', 'Project updated');
+        ->with('success', 'Project succesvol bijgewerkt.');
 }
 
 
-    public function destroy(Project $project)
-    {
-        $this->authorize('delete', $project);
-
-        $project->delete();
-
-        return redirect()
-            ->route('projects.index')
-            ->with('success', 'Project verwijderd!');
+public function destroy(Project $project)
+{
+    // Optional: image verwijderen
+    if ($project->image) {
+        \Storage::disk('public')->delete($project->image);
     }
+
+    $project->delete();
+
+    return redirect()
+        ->route('admin.projects.index')
+        ->with('success', 'Project succesvol verwijderd.');
+}
+
 }
